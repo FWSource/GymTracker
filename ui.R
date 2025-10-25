@@ -38,7 +38,12 @@ ui<-page_navbar(
                 tableOutput("workout"),
                 actionButton("finishWorkout", "Finish Workout")
       ),
-      nav_panel(title = "Previous workouts", p("See what you did in a previous session"))
+      nav_panel(title = "Previous workouts",
+                selectInput("prev_workout",
+                            "Previous workout",
+                            workout_list$Name),
+                actionButton("load_workout","Load workout"),
+                tableOutput("past_workout"))
     )
   ),
   nav_panel(title = "PBs and graphs", p("Personal bests and graphs")),
