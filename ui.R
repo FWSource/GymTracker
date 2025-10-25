@@ -2,6 +2,7 @@ library(shiny)
 library(bslib)
 library(htmltools)
 exercises<-c("Dead lift","Squat","Bench press")
+load("workouts/workout_list.RData")
 ui<-page_navbar(
   title = "Gym Tracker",
   theme = bs_theme(
