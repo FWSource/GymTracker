@@ -10,12 +10,6 @@ ui<-page_navbar(
   navbar_options = navbar_options(
     underline = TRUE
   ),
-  # sidebar=selectInput(
-  #   "exercise", "Excercise",
-  #   exercises,
-  #   selected = "Squat"
-  # ),
-  # sidebar=numericInput("weight", "Weight",value=0,min=0, max=999),
   
   nav_panel(
     title = "Workouts",

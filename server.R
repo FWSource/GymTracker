@@ -1,6 +1,6 @@
 library(shiny)
 library(dplyr)
-
+library(tidyverse)
 server<-function(input, output, session) {
   
   this_workout <- reactiveValues(
@@ -39,16 +39,20 @@ server<-function(input, output, session) {
   align="c")
   
   observeEvent(input$finishWorkout, {
-    final_workout<-list(name = paste(input$ex_date, paste(input$tags,collapse=""),sep=""),
+    final_workout<-list(name = paste(input$ex_date,"_", paste(input$tags,collapse=""),sep=""),
                         date = input$ex_date,
                         tags = input$tags,
                         workout = this_workout)
-    showModal(modalDialog(
-      title = "Test",
-      renderText({final_workout$name}),
-      easyClose = TRUE,
-      footer = NULL
-    ))
-    save(final_workout, file = paste(final_workout$name,".RData",sep=""))
+    # showModal(modalDialog(
+    #   title = "Test",
+    #   renderText({final_workout$name}),
+    #   easyClose = TRUE,
+    #   footer = NULL
+    # ))
+    save(final_workout, file = paste("workouts/",final_workout$name,".RData",sep=""))
+    load("workouts/workout_list.RData")
+    workout_list<-add_row(workout_list,Name=final_workout$name[1],Date=final_workout$date[1],Tags =paste(final_workout$tags,collapse = " "))
+    save(workout_list, file = "workouts/workout_list.RData")
+    
   })
 }
