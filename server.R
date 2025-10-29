@@ -1,8 +1,11 @@
 library(shiny)
 library(dplyr)
 library(tidyverse)
+
 server<-function(input, output, session) {
   load("workouts/workout_list.RData")
+  
+  
   this_workout <- reactiveValues(
     table1 = tibble(Set = character(), Exercise = character(), Weight=numeric(), Reps=integer())
   )
@@ -56,7 +59,6 @@ server<-function(input, output, session) {
     #   footer = NULL
     # ))
     save(final_workout, file = paste("workouts/",final_workout$name,".RData",sep=""))
-    #load("workouts/workout_list.RData")
     workout_list<-add_row(workout_list,Name=final_workout$name[1],Date=final_workout$date[1],Tags =paste(final_workout$tags,collapse = " "))
     workout_list<-workout_list[order(desc(workout_list$Date)),]
     save(workout_list, file = "workouts/workout_list.RData")
@@ -67,7 +69,7 @@ server<-function(input, output, session) {
     showModal(modalDialog(
       title = "Test",
       #renderText({input$prev_workout}),
-      paste("workouts/",input$prev_workout,".RData",sep=""),
+      #paste("workouts/",input$prev_workout,".RData",sep=""),
       easyClose = TRUE,
       footer = NULL
     ))
