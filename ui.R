@@ -1,7 +1,7 @@
 library(shiny)
 library(bslib)
 library(htmltools)
-exercises<-c("Dead lift","Squat","Bench press")
+exercises<-readRDS("workouts/exercises.rds")
 load("workouts/workout_list.RData")
 ui<-page_navbar(
   title = "Gym Tracker",
@@ -20,7 +20,7 @@ ui<-page_navbar(
         selectizeInput(
           "exercise", "Excercise",
           exercises,
-          selected = "Squat",
+          selected = "Cossack squat",
           options = list(create = TRUE)
         ),
         numericInput("weight", "Weight",value=0,min=0, max=999),

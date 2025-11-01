@@ -1,7 +1,7 @@
 library(shiny)
 library(dplyr)
 library(tidyverse)
-
+exercises<-readRDS("workouts/exercises.rds")
 server<-function(input, output, session) {
   load("workouts/workout_list.RData")
   
@@ -63,7 +63,8 @@ server<-function(input, output, session) {
     workout_list<-add_row(workout_list,Name=final_workout$name[1],Date=final_workout$date[1],Tags =paste(final_workout$tags,collapse = " "))
     workout_list<-workout_list[order(desc(workout_list$Date)),]
     save(workout_list, file = "workouts/workout_list.RData")
-    
+    exercises<-sort(c(exercises, unique(pull(final_workout$workout_table,"Exercise"))))
+    saveRDS(exercises, "workouts/exercises.rds")
   })
   
   observeEvent(input$load_workout,{#
