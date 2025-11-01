@@ -51,7 +51,8 @@ server<-function(input, output, session) {
                         
                         date = input$ex_date,
                         tags = input$tags,
-                        workout = this_workout)
+                        workout = this_workout,
+                        workout_table = this_workout$table1)
     # showModal(modalDialog(
     #   title = "Test",
     #   renderText({final_workout$name}),
